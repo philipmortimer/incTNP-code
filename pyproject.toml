@@ -1,0 +1,30 @@
+[tool.isort]
+profile = "black"
+
+[tool.pylint]
+max-line-length = 120
+disable = "C0114, C0115, C0103, C0116, R0903, R0913, R0914, R1729, W0231"
+
+[tool.pylint.TYPECHECK]
+generated-members = "numpy.*, torch.*, torch.nn.*, nn.*, torch.nn.functional.*"
+
+[project]
+name = "tnpml"
+version = "0.0.1"
+authors = [
+    {name="ANON", email="ANON@email.com"},
+]
+description = "Transformer neural processes"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "www.annonsubredacted.com"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

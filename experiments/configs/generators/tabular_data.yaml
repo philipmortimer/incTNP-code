@@ -1,0 +1,41 @@
+generators:
+  train:
+    _target_: tnp.data.tabular_data.TabularDataGeneratorUniqueMLPPerDataset
+    dim: ${params.dim_x}
+    min_nc: 10
+    max_nc: ${params.max_tokens}
+    min_nt: ${params.nt}
+    max_nt: ${params.nt}
+    samples_per_epoch: 32768
+    batch_size: 128
+  val:
+    _target_: tnp.data.tabular_data.TabularDataGeneratorUniqueMLPPerDataset
+    dim: ${params.dim_x}
+    min_nc: 10
+    max_nc: ${params.max_tokens}
+    min_nt: ${params.nt}
+    max_nt: ${params.nt}
+    samples_per_epoch: 8192
+    batch_size: 128
+    deterministic: True
+    deterministic_seed: ${misc.seed}
+  test:
+    _target_: tnp.data.tabular_data.TabularDataGeneratorUniqueMLPPerDataset
+    dim: ${params.dim_x}
+    min_nc: 10
+    max_nc: ${params.max_tokens}
+    min_nt: ${params.nt}
+    max_nt: ${params.nt}
+    samples_per_epoch: 80000
+    batch_size: 128
+    deterministic: True
+    deterministic_seed: ${misc.seed}
+
+params:
+  dim_x: 20
+  dim_y: 1
+  max_tokens: 1024
+  nt: 128
+
+misc:
+  seed: 1

@@ -1,0 +1,52 @@
+model:
+  _target_: tnp.models.cnp.CNP
+  encoder: ${cnp_encoder}
+  decoder: ${tnp_decoder}
+  likelihood: ${likelihood}
+
+cnp_encoder:
+  _target_: tnp.models.cnp.CNPEncoder
+  deepset: ${deepset}
+
+deepset:
+  _target_: tnp.networks.deepset.DeepSet
+  z_encoder: ${z_encoder}
+  agg: mean
+
+z_encoder:
+  _target_: tnp.networks.mlp.MLP
+  in_dim: ${eval:'${params.dim_x} + ${params.dim_y}'}
+  out_dim: ${params.embed_dim}
+  num_layers: ${params.num_layers}
+  width: ${params.embed_dim}
+
+tnp_decoder:
+  _target_: tnp.models.tnp.TNPDecoder
+  z_decoder: ${z_decoder}
+
+z_decoder:
+  _target_: tnp.networks.mlp.MLP
+  in_dim: ${eval:'${params.dim_x} + ${params.embed_dim}'}
+  out_dim: ${eval:'${params.dim_y} * 2'}
+  num_layers: ${params.num_layers}
+  width: ${params.embed_dim}
+
+likelihood:
+  _target_: tnp.likelihoods.gaussian.HeteroscedasticNormalLikelihood
+
+optimiser:
+  _target_: torch.optim.AdamW
+  _partial_: True
+  lr: 5.0e-4
+
+params:
+  epochs: 200
+  embed_dim: 128
+  num_layers: 5
+
+
+misc:
+  name: CNP-L${params.num_layers}-D${params.embed_dim}
+  resume_from_checkpoint: null
+  gradient_clip_val: 0.5
+  plot_interval: 10

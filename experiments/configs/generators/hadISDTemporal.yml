@@ -1,0 +1,47 @@
+generators:
+  train:
+    _target_: tnp.data.hadISDTemporal.TemporalHadISDDataGenerator
+    split: train
+    data_root: ${params.data_root}
+    N_c_min: 100
+    N_c_max: 2100
+    N_t_min: 250
+    N_t_max: 250
+    samples_per_epoch: 32_000
+    batch_size: 32
+    delta_hours: ${params.delta_hours}
+    h_window: ${params.h_window}
+    ordering: ${params.ordering}
+  val:
+    _target_: tnp.data.hadISDTemporal.TemporalHadISDDataGenerator
+    split: val
+    data_root: ${params.data_root}
+    N_c_min: 100
+    N_c_max: 2100
+    N_t_min: 250
+    N_t_max: 250
+    samples_per_epoch: 8_000
+    batch_size: 32
+    delta_hours: ${params.delta_hours}
+    h_window: ${params.h_window}
+    ordering: ${params.ordering}
+  test:
+    _target_: tnp.data.hadISDTemporal.TemporalHadISDDataGenerator
+    split: test
+    data_root: ${params.data_root}
+    N_c_min: 100
+    N_c_max: 2100
+    N_t_min: 250
+    N_t_max: 250
+    samples_per_epoch: 80_000
+    batch_size: 32
+    delta_hours: ${params.delta_hours}
+    h_window: ${params.h_window}
+    ordering: ${params.ordering}
+
+params:
+  data_root: /REPLACE_WITH_REAL_DATA_ROOT_FOR_SYSTEM
+  delta_hours: 6
+  h_window: 8
+  ordering: "ctx_time"
+
