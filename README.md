@@ -75,8 +75,6 @@ We utilize the WISKI library from [online_gp](https://github.com/wjmaddox/online
 
 This submission includes a range of additional scripts and model implementations.
 
-Portions of this codebase are adapted from an MIT-licensed implementation of Transformer Neural Processes.
-
 ## Verified Environment
 This codebase (speficially the `environment.yml` install) has been verified to run on the following setup:
 * **OS:** Ubuntu 24.04.3 LTS
