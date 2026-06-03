@@ -1,6 +1,10 @@
 # Incremental Transformer Neural Processes
 
-This codebase contains the model implementations, training pipelines, and evaluation scripts for our work on Incremental Transformer Neural Processes.
+**Accepted to ICML 2026** | [arXiv Paper](https://arxiv.org/abs/2602.18955) | [ICML Poster](https://icml.cc/virtual/2026/poster/62748)
+
+This is the codebase for our ICML 2026 paper on Incremental Transformer Neural Processes (incTNPs). Incremental Transformer Neural Processes leverage causal masking and Key-Value (KV) caching to enable efficient, linear-time context updates for sequential data streams. By utilizing a dense autoregressive training strategy, incTNP matches or exceeds the predictive performance of standard TNPs while delivering orders-of-magnitude speedups for sequential inference. We show strong empirical results on GP regression, tabular data modelling and weather forecasting.
+
+This repository contains the model implementations, training pipelines, and evaluation scripts for our work on Incremental Transformer Neural Processes.
 
 ## Environment Setup
 To set up the environment, run the following commands:
@@ -9,7 +13,6 @@ To set up the environment, run the following commands:
 conda env create -f environment.yml
 conda activate inc_tnp
 pip install -e .
-
 ```
 
 ## Models
@@ -26,14 +29,12 @@ To run the training pipeline:
 
 ```bash
 python experiments/train.py --config experiments/configs/synthetic1dRBF/{MODEL_CONFIG}
-
 ```
 
 Example (training incTNP):
 
 ```bash
 python experiments/train.py --config experiments/configs/synthetic1dRBF/gp_causal_tnp_lr_scheduler_rangesame.yaml
-
 ```
 
 ## GP Plotting
@@ -42,7 +43,6 @@ To generate plots with trained models:
 
 ```bash
 python experiments/gp_plots.py
-
 ```
 
 ## Tabular Training
@@ -51,14 +51,12 @@ To train on tabular datasets:
 
 ```bash
 python experiments/lightning_train.py --config experiments/configs/generators/tabular_data.yaml experiments/configs/tabular_data/{MODEL_CONFIG}
-
 ```
 
 Example (training incTNP-Seq):
 
 ```bash
 python experiments/lightning_train.py --config experiments/configs/generators/tabular_data.yaml experiments/configs/tabular_data/tab_batched_causal_tnp_lr_scheduler.yaml
-
 ```
 
 ## HadISD
@@ -73,10 +71,10 @@ We utilize the WISKI library from [online_gp](https://github.com/wjmaddox/online
 
 ## Other
 
-This submission includes a range of additional scripts and model implementations.
+We include a range of additional scripts and model implementations.
 
 ## Verified Environment
-This codebase (speficially the `environment.yml` install) has been verified to run on the following setup:
+This codebase (specifically the `environment.yml` install) has been verified to run on the following setup:
 * **OS:** Ubuntu 24.04.3 LTS
 * **Python:** 3.12.12
 * **PyTorch:** 2.10.0+cu128 (CUDA 12.8)
@@ -99,5 +97,14 @@ export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 ## Codebase
 This implementation builds upon the original [TNP codebase](https://github.com/cambridge-mlg/tnp) developed by Matthew Ashman and Cristiana Diaconu.
 
-*Note: This `incTNP` repository is the initial code release for our preprint. We intend to further polish, document, and refine the codebase in the near future.*
+## Citation
+If you find our work or this code useful in your research, please cite our paper:
 
+```bibtex
+@inproceedings{mortimer2026incremental,
+	title={{Incremental Transformer Neural Processes}},
+	author={Mortimer, Philip and Diaconu, Cristiana and Rochussen, Tommy and Mlodozeniec, Bruno and Turner, Richard E.},
+	year={2026},
+	booktitle={Forty-third International Conference on Machine Learning}
+}
+```
